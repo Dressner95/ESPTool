@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Diagnostics;
 
 namespace ESPTool
 {
@@ -22,14 +23,22 @@ namespace ESPTool
 
         private void tryConnection(object sender, EventArgs e)
         {
-            portToUse = new SerialPort();
-            portToUse.BaudRate = 115200;
-            portToUse.PortName = comPort.Text;
+            portToUse = new SerialPort(comPort.Text, 9600, Parity.Even, 8, StopBits.One);
+            portToUse.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             portToUse.Open();
 
             connectButton.BackColor = Color.LawnGreen;
+            //portToUse.Close();
         }
 
+        private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadLine();
+            Debug.Print("Data Received:");
+            Debug.Print(indata);
+            //Console.Write(indata);
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -49,5 +58,11 @@ namespace ESPTool
         {
 
         }
+
+        private void scanButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
