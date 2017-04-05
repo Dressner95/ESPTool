@@ -134,6 +134,7 @@
             this.copyButton.TabIndex = 2;
             this.copyButton.Text = "Copy to Excel";
             this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
             // 
             // esp01Label
             // 
@@ -152,6 +153,7 @@
             this.esp01Text.Name = "esp01Text";
             this.esp01Text.Size = new System.Drawing.Size(75, 22);
             this.esp01Text.TabIndex = 4;
+            this.esp01Text.TextChanged += new System.EventHandler(this.ESP01_TextChanged);
             // 
             // esp04Text
             // 
@@ -433,7 +435,6 @@
         private System.Windows.Forms.Button scanButton;
         private System.Windows.Forms.Button copyButton;
         private System.Windows.Forms.Label esp01Label;
-        private System.Windows.Forms.TextBox esp01Text;
         private System.Windows.Forms.TextBox esp04Text;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox esp07Text;
@@ -460,6 +461,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox dumpText;
         private System.Windows.Forms.ProgressBar scanProgress;
+        public System.Windows.Forms.TextBox esp01Text;
     }
 }
 
