@@ -12,10 +12,10 @@ using System.Diagnostics;
 
 namespace ESPTool
 {
-    public partial class Form1 : Form
+    public partial class ESPTool : Form
     {
         private SerialPort portToUse;
-        public Form1()
+        public ESPTool()
         {
             InitializeComponent();
 
@@ -94,11 +94,7 @@ namespace ESPTool
 
         private void scanButton_Click(object sender, EventArgs e)
         {
-            portToUse.Write("scan");
-            esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = ""; }));
-            esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = ""; }));
-            esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = ""; }));
-            esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = ""; }));
+            portToUse.Write("scan");            
         }
 
         private void copyButton_Click(object sender, EventArgs e)
