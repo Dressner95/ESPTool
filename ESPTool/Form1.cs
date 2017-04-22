@@ -54,6 +54,8 @@ namespace ESPTool
                 if ((currentScan + 1) == Int32.Parse(scans2Make))
                 {
                     Debug.Print("doneScanning = true");
+                    copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = true; }));
+                    scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = true; }));
                     doneScanning = true;
                 }
                 else
@@ -95,7 +97,7 @@ namespace ESPTool
                         esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = "-" + averages[10].ToString(); }));
                         esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = "-" + averages[11].ToString(); }));
                     }
-                    espStatus.BackColor = Color.Green;
+                    espStatus.BackColor = Color.LawnGreen;
                     break;
                 case "busy":
                     espStatus.BackColor = Color.Yellow;
@@ -192,26 +194,6 @@ namespace ESPTool
 
             }
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void scanButton_Click(object sender, EventArgs e)
         {
             portToUse.Write("scan"); //start scan protocol ESP side
@@ -231,17 +213,14 @@ namespace ESPTool
             esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = ""; }));
             esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = ""; }));
             esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = ""; }));
-            
+            copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = false; }));
+            scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = false; }));
+
         }
 
         private void copyButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void ESP01_TextChanged(object sender, EventArgs e)
-        {
-
+            Clipboard.SetText(esp01Text.Text + "\t" + esp02Text.Text + "\t" + esp03Text.Text + "\t" + esp04Text.Text + "\t" + esp05Text.Text + "\t" + esp06Text.Text + "\t" + esp06Text.Text + "\t" + esp07Text.Text + "\t" + esp08Text.Text + "\t" + esp09Text.Text + "\t" + esp10Text.Text + "\t" + esp11Text.Text + "\t" + esp12Text.Text);
         }
 
         private void scanNumber_TextChanged(object sender, EventArgs e)

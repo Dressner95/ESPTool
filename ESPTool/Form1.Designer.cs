@@ -132,6 +132,7 @@
             // 
             // copyButton
             // 
+            this.copyButton.Enabled = false;
             this.copyButton.Location = new System.Drawing.Point(372, 285);
             this.copyButton.Name = "copyButton";
             this.copyButton.Size = new System.Drawing.Size(178, 47);
@@ -149,7 +150,6 @@
             this.esp01Label.Size = new System.Drawing.Size(65, 20);
             this.esp01Label.TabIndex = 3;
             this.esp01Label.Text = "ESP 01";
-            this.esp01Label.Click += new System.EventHandler(this.label1_Click);
             // 
             // esp01Text
             // 
@@ -157,7 +157,6 @@
             this.esp01Text.Name = "esp01Text";
             this.esp01Text.Size = new System.Drawing.Size(75, 22);
             this.esp01Text.TabIndex = 4;
-            this.esp01Text.TextChanged += new System.EventHandler(this.ESP01_TextChanged);
             // 
             // esp04Text
             // 
@@ -345,7 +344,6 @@
             this.label11.Size = new System.Drawing.Size(65, 20);
             this.label11.TabIndex = 19;
             this.label11.Text = "ESP 03";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // scanProgress
             // 
@@ -392,6 +390,7 @@
             this.scanNumber.Name = "scanNumber";
             this.scanNumber.Size = new System.Drawing.Size(100, 22);
             this.scanNumber.TabIndex = 1;
+            this.scanNumber.Text = "5";
             this.scanNumber.TextChanged += new System.EventHandler(this.scanNumber_TextChanged);
             // 
             // label12
@@ -439,8 +438,7 @@
             this.Controls.Add(this.scanButton);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "h";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "ESP Data Collector";
             this.Click += new System.EventHandler(this.tryConnection);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
