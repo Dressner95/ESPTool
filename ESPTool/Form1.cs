@@ -17,6 +17,7 @@ namespace ESPTool
         private SerialPort portToUse;
         String scans2Make = "5";
         int currentScan;
+        int[] reset = new int[] { 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500 };
         public int[] vals2Average = new int[12];
         public int[] averages = new int [12];
         bool doneScanning = false;
@@ -28,7 +29,7 @@ namespace ESPTool
 
         private void tryConnection(object sender, EventArgs e)
         {
-            portToUse = new SerialPort(comPort.Text, 115200, Parity.None, 8, StopBits.One);
+            portToUse = new SerialPort(comPort.Text, 9600, Parity.None, 8, StopBits.One);
             portToUse.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             portToUse.Open();
             scanButton.Enabled = true;
@@ -116,56 +117,56 @@ namespace ESPTool
                 case "ESP01":
                     if (esp01Text.InvokeRequired)
                     {
-                        vals2Average[0] += Int32.Parse(data[1]);
+                        vals2Average[0] += Int32.Parse(data[1]) - 100;
                         //esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP02":
                     if (esp02Text.InvokeRequired)
                     {
-                        vals2Average[1] += Int32.Parse(data[1]);
+                        vals2Average[1] += Int32.Parse(data[1]) - 100;
                         //esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP03":
                     if (esp03Text.InvokeRequired)
                     {
-                        vals2Average[2] += Int32.Parse(data[1]);                       
+                        vals2Average[2] += Int32.Parse(data[1]) - 100;                       
                         //esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP04":
                     if (esp04Text.InvokeRequired)
                     {
-                        vals2Average[3] += Int32.Parse(data[1]);
+                        vals2Average[3] += Int32.Parse(data[1]) - 100;
                         //esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP05":
                     if (esp05Text.InvokeRequired)
                     {
-                        vals2Average[4] += Int32.Parse(data[1]);
+                        vals2Average[4] += Int32.Parse(data[1]) - 100;
                         //esp05Text.Invoke(new MethodInvoker(delegate { esp05Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP06":
                     if (esp06Text.InvokeRequired)
                     {
-                        vals2Average[5] += Int32.Parse(data[1]);
+                        vals2Average[5] += Int32.Parse(data[1]) - 100;
                         //esp06Text.Invoke(new MethodInvoker(delegate { esp06Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP07":
                     if (esp07Text.InvokeRequired)
                     {
-                        vals2Average[6] += Int32.Parse(data[1]);
+                        vals2Average[6] += Int32.Parse(data[1]) - 100;
                         //esp07Text.Invoke(new MethodInvoker(delegate { esp07Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP08":
                     if (esp08Text.InvokeRequired)
                     {
-                        vals2Average[7] += Int32.Parse(data[1]);
+                        vals2Average[7] += Int32.Parse(data[1]) - 100;
                         Debug.Print("Current value to average = " + vals2Average[7].ToString());
                         //esp08Text.Invoke(new MethodInvoker(delegate { esp08Text.Text = "-" + data[1]; }));
                     }
@@ -173,28 +174,28 @@ namespace ESPTool
                 case "ESP09":
                     if (esp09Text.InvokeRequired)
                     {
-                        vals2Average[8] += Int32.Parse(data[1]);
+                        vals2Average[8] += Int32.Parse(data[1]) - 100;
                         //esp09Text.Invoke(new MethodInvoker(delegate { esp09Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP10":
                     if (esp10Text.InvokeRequired)
                     {
-                        vals2Average[9] += Int32.Parse(data[1]);
+                        vals2Average[9] += Int32.Parse(data[1]) - 100;
                         //esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP11":
                     if (esp11Text.InvokeRequired)
                     {
-                        vals2Average[10] += Int32.Parse(data[1]);
+                        vals2Average[10] += Int32.Parse(data[1]) - 100;
                         //esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP12":
                     if (esp12Text.InvokeRequired)
                     {
-                        vals2Average[11] += Int32.Parse(data[1]);
+                        vals2Average[11] += Int32.Parse(data[1]) - 100;
                         //esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = "-" + data[1]; }));
                     }
                     break;
@@ -203,6 +204,7 @@ namespace ESPTool
         }
         private void scanButton_Click(object sender, EventArgs e)
         {
+            vals2Average = reset;
             portToUse.Write("scan"); //start scan protocol ESP side
             Debug.Print("sent scan command");
             doneScanning = false; //reset conditional variables

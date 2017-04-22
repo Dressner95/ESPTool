@@ -5,7 +5,7 @@ String inString= "";
 int waitTime = 600;
 int scans = 1;
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
   delay(100);
@@ -28,6 +28,7 @@ void loop() {
             Serial.println(WiFi.RSSI(i));
           }
         }
+        
         Serial.println(j);
       }
       Serial.println("done");
