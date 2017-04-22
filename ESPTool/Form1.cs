@@ -71,17 +71,24 @@ namespace ESPTool
                 case "done":
                     if (doneScanning)
                     {
+                        Debug.Print("calc averages");
                         // take average
-                        for(int i = 0; i < Int32.Parse(scans2Make); i++ )
+                        for (int i = 0; i < 12; i++ )
                         {
+                            Debug.Print(vals2Average[i].ToString());
                             if (vals2Average[i] != 0)
                             {
-                                averages[i] = vals2Average[i] / Int32.Parse(scans2Make);
+                                averages[i] = vals2Average[i] / Int32.Parse(scanNumber.Text);
+                                Debug.Print(i + vals2Average[i].ToString());
+                                Debug.Print(i + averages[i].ToString());
+                                vals2Average[i] = 0;
                             }
                             else
                             {
                                 averages[i] = 0;
+                                Debug.Print("Average is 0");
                             }
+                            
                         }
                         // print all to tables
                         esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + averages[0].ToString(); }));
@@ -123,8 +130,7 @@ namespace ESPTool
                 case "ESP03":
                     if (esp03Text.InvokeRequired)
                     {
-                        vals2Average[2] += Int32.Parse(data[1]);
-                        Debug.Print(vals2Average[2].ToString());
+                        vals2Average[2] += Int32.Parse(data[1]);                       
                         //esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = "-" + data[1]; }));
                     }
                     break;
@@ -160,6 +166,7 @@ namespace ESPTool
                     if (esp08Text.InvokeRequired)
                     {
                         vals2Average[7] += Int32.Parse(data[1]);
+                        Debug.Print("Current value to average = " + vals2Average[7].ToString());
                         //esp08Text.Invoke(new MethodInvoker(delegate { esp08Text.Text = "-" + data[1]; }));
                     }
                     break;
