@@ -15,7 +15,7 @@ namespace ESPTool
     public partial class Form1 : Form
     {
         private SerialPort portToUse;
-        String scans2Make;
+        String scans2Make = "5";
         int currentScan;
         public int[] vals2Average = new int[12];
         public int[] averages = new int [12];
