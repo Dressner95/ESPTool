@@ -15,6 +15,11 @@ namespace ESPTool
     public partial class Form1 : Form
     {
         private SerialPort portToUse;
+        String scans2Make;
+        int currentScan;
+        public int[] vals2Average = new int[12];
+        public int[] averages = new int [12];
+        bool doneScanning = false;
         public Form1()
         {
             InitializeComponent();
@@ -26,8 +31,10 @@ namespace ESPTool
             portToUse = new SerialPort(comPort.Text, 115200, Parity.None, 8, StopBits.One);
             portToUse.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             portToUse.Open();
+            scanButton.Enabled = true;
 
             connectButton.BackColor = Color.LawnGreen;
+            espStatus.BackColor = Color.LawnGreen;
             //portToUse.Close();
         }
 
@@ -35,40 +42,153 @@ namespace ESPTool
         {
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadLine();
-            setText(indata);
-            //Debug.Print("Data Received:");
+            processText(indata.Replace("\r", ""));
             Debug.Print(indata);            
         }
-         void setText(String fromArd)
+         void processText(String fromESP)
         {
-            string[] data = fromArd.Split('-');
+            if (Int32.TryParse(fromESP, out currentScan))
+            {
+                scanProgress.Invoke(new MethodInvoker(delegate { scanProgress.Value = currentScan + 1; }));
+
+                if ((currentScan + 1) == Int32.Parse(scans2Make))
+                {
+                    Debug.Print("doneScanning = true");
+                    doneScanning = true;
+                }
+                else
+                {
+                    Debug.Print("doneScanning = false");
+                    doneScanning = false;
+                }
+            }
+            string[] data = fromESP.Split('-');
+            Debug.Print("data in = " + data[0]);
             switch (data[0])
             {
+                case "done":
+                    if (doneScanning)
+                    {
+                        // take average
+                        for(int i = 0; i < Int32.Parse(scans2Make); i++ )
+                        {
+                            if (vals2Average[i] != 0)
+                            {
+                                averages[i] = vals2Average[i] / Int32.Parse(scans2Make);
+                            }
+                            else
+                            {
+                                averages[i] = 0;
+                            }
+                        }
+                        // print all to tables
+                        esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + averages[0].ToString(); }));
+                        esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = "-" + averages[1].ToString(); }));
+                        esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = "-" + averages[2].ToString(); }));
+                        esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = "-" + averages[3].ToString(); }));
+                        esp05Text.Invoke(new MethodInvoker(delegate { esp05Text.Text = "-" + averages[4].ToString(); }));
+                        esp06Text.Invoke(new MethodInvoker(delegate { esp06Text.Text = "-" + averages[5].ToString(); }));
+                        esp07Text.Invoke(new MethodInvoker(delegate { esp07Text.Text = "-" + averages[6].ToString(); }));
+                        esp08Text.Invoke(new MethodInvoker(delegate { esp08Text.Text = "-" + averages[7].ToString(); }));
+                        esp09Text.Invoke(new MethodInvoker(delegate { esp09Text.Text = "-" + averages[8].ToString(); }));
+                        esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = "-" + averages[9].ToString(); }));
+                        esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = "-" + averages[10].ToString(); }));
+                        esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = "-" + averages[11].ToString(); }));
+                    }
+                    espStatus.BackColor = Color.Green;
+                    break;
+                case "busy":
+                    espStatus.BackColor = Color.Yellow;
+                    break;
+                case "howmany":
+                    Debug.Print("sending scan amount");
+                    portToUse.Write(scans2Make);             
+                    break;
                 case "ESP01":
                     if (esp01Text.InvokeRequired)
                     {
-                        esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + data[1]; }));
+                        vals2Average[0] += Int32.Parse(data[1]);
+                        //esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP02":
                     if (esp02Text.InvokeRequired)
                     {
-                        esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = "-" + data[1]; }));
+                        vals2Average[1] += Int32.Parse(data[1]);
+                        //esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP03":
                     if (esp03Text.InvokeRequired)
                     {
-                        esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = "-" + data[1]; }));
+                        vals2Average[2] += Int32.Parse(data[1]);
+                        Debug.Print(vals2Average[2].ToString());
+                        //esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = "-" + data[1]; }));
                     }
                     break;
                 case "ESP04":
                     if (esp04Text.InvokeRequired)
                     {
-                        esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = "-" + data[1]; }));
+                        vals2Average[3] += Int32.Parse(data[1]);
+                        //esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = "-" + data[1]; }));
                     }
                     break;
-
+                case "ESP05":
+                    if (esp05Text.InvokeRequired)
+                    {
+                        vals2Average[4] += Int32.Parse(data[1]);
+                        //esp05Text.Invoke(new MethodInvoker(delegate { esp05Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP06":
+                    if (esp06Text.InvokeRequired)
+                    {
+                        vals2Average[5] += Int32.Parse(data[1]);
+                        //esp06Text.Invoke(new MethodInvoker(delegate { esp06Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP07":
+                    if (esp07Text.InvokeRequired)
+                    {
+                        vals2Average[6] += Int32.Parse(data[1]);
+                        //esp07Text.Invoke(new MethodInvoker(delegate { esp07Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP08":
+                    if (esp08Text.InvokeRequired)
+                    {
+                        vals2Average[7] += Int32.Parse(data[1]);
+                        //esp08Text.Invoke(new MethodInvoker(delegate { esp08Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP09":
+                    if (esp09Text.InvokeRequired)
+                    {
+                        vals2Average[8] += Int32.Parse(data[1]);
+                        //esp09Text.Invoke(new MethodInvoker(delegate { esp09Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP10":
+                    if (esp10Text.InvokeRequired)
+                    {
+                        vals2Average[9] += Int32.Parse(data[1]);
+                        //esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP11":
+                    if (esp11Text.InvokeRequired)
+                    {
+                        vals2Average[10] += Int32.Parse(data[1]);
+                        //esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = "-" + data[1]; }));
+                    }
+                    break;
+                case "ESP12":
+                    if (esp12Text.InvokeRequired)
+                    {
+                        vals2Average[11] += Int32.Parse(data[1]);
+                        //esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = "-" + data[1]; }));
+                    }
+                    break;
 
             }
         }
@@ -94,11 +214,24 @@ namespace ESPTool
 
         private void scanButton_Click(object sender, EventArgs e)
         {
-            portToUse.Write("scan");
-            esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = ""; }));
+            portToUse.Write("scan"); //start scan protocol ESP side
+            Debug.Print("sent scan command");
+            doneScanning = false; //reset conditional variables
+            scanProgress.Invoke(new MethodInvoker(delegate { scanProgress.Value = 0; }));
+            scanProgress.Invoke(new MethodInvoker(delegate { scanProgress.Maximum = Int32.Parse(scans2Make); }));
+            esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = ""; })); //Clear all past values
             esp02Text.Invoke(new MethodInvoker(delegate { esp02Text.Text = ""; }));
             esp03Text.Invoke(new MethodInvoker(delegate { esp03Text.Text = ""; }));
             esp04Text.Invoke(new MethodInvoker(delegate { esp04Text.Text = ""; }));
+            esp05Text.Invoke(new MethodInvoker(delegate { esp05Text.Text = ""; }));
+            esp06Text.Invoke(new MethodInvoker(delegate { esp06Text.Text = ""; }));
+            esp07Text.Invoke(new MethodInvoker(delegate { esp07Text.Text = ""; }));
+            esp08Text.Invoke(new MethodInvoker(delegate { esp08Text.Text = ""; }));
+            esp09Text.Invoke(new MethodInvoker(delegate { esp09Text.Text = ""; }));
+            esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = ""; }));
+            esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = ""; }));
+            esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = ""; }));
+            
         }
 
         private void copyButton_Click(object sender, EventArgs e)
@@ -109,6 +242,12 @@ namespace ESPTool
         private void ESP01_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void scanNumber_TextChanged(object sender, EventArgs e)
+        {
+            scans2Make = scanNumber.Text;
+            Debug.Print(scans2Make);
         }
     }
 }

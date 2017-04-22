@@ -59,12 +59,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.esp03Text = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.excelPanel = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dumpText = new System.Windows.Forms.TextBox();
             this.scanProgress = new System.Windows.Forms.ProgressBar();
+            this.scanPanel = new System.Windows.Forms.Panel();
+            this.espStatus = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.scanNumber = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.excelPanel.SuspendLayout();
+            this.scanPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -104,6 +106,7 @@
             this.comPort.Name = "comPort";
             this.comPort.Size = new System.Drawing.Size(100, 22);
             this.comPort.TabIndex = 1;
+            this.comPort.Text = "COM10";
             // 
             // panelTitle
             // 
@@ -117,8 +120,9 @@
             // 
             // scanButton
             // 
+            this.scanButton.Enabled = false;
             this.scanButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.scanButton.Location = new System.Drawing.Point(29, 212);
+            this.scanButton.Location = new System.Drawing.Point(29, 224);
             this.scanButton.Name = "scanButton";
             this.scanButton.Size = new System.Drawing.Size(236, 105);
             this.scanButton.TabIndex = 1;
@@ -132,7 +136,7 @@
             this.copyButton.Name = "copyButton";
             this.copyButton.Size = new System.Drawing.Size(178, 47);
             this.copyButton.TabIndex = 2;
-            this.copyButton.Text = "Copy to Excel";
+            this.copyButton.Text = "Copy";
             this.copyButton.UseVisualStyleBackColor = true;
             this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
             // 
@@ -343,48 +347,70 @@
             this.label11.Text = "ESP 03";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
-            // excelPanel
+            // scanProgress
             // 
-            this.excelPanel.Controls.Add(this.label12);
-            this.excelPanel.Controls.Add(this.dumpText);
-            this.excelPanel.Location = new System.Drawing.Point(13, 125);
-            this.excelPanel.Name = "excelPanel";
-            this.excelPanel.Size = new System.Drawing.Size(212, 71);
-            this.excelPanel.TabIndex = 27;
+            this.scanProgress.Location = new System.Drawing.Point(310, 12);
+            this.scanProgress.Maximum = 10;
+            this.scanProgress.Name = "scanProgress";
+            this.scanProgress.Size = new System.Drawing.Size(302, 23);
+            this.scanProgress.Step = 1;
+            this.scanProgress.TabIndex = 28;
+            // 
+            // scanPanel
+            // 
+            this.scanPanel.Controls.Add(this.espStatus);
+            this.scanPanel.Controls.Add(this.label13);
+            this.scanPanel.Controls.Add(this.scanNumber);
+            this.scanPanel.Controls.Add(this.label12);
+            this.scanPanel.Location = new System.Drawing.Point(13, 125);
+            this.scanPanel.Name = "scanPanel";
+            this.scanPanel.Size = new System.Drawing.Size(276, 81);
+            this.scanPanel.TabIndex = 29;
+            // 
+            // espStatus
+            // 
+            this.espStatus.BackColor = System.Drawing.Color.Red;
+            this.espStatus.Location = new System.Drawing.Point(145, 4);
+            this.espStatus.Name = "espStatus";
+            this.espStatus.Size = new System.Drawing.Size(128, 74);
+            this.espStatus.TabIndex = 3;
+            this.espStatus.Text = "espStatus";
+            this.espStatus.UseVisualStyleBackColor = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 36);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(94, 17);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Scan Number";
+            // 
+            // scanNumber
+            // 
+            this.scanNumber.Location = new System.Drawing.Point(13, 56);
+            this.scanNumber.Name = "scanNumber";
+            this.scanNumber.Size = new System.Drawing.Size(100, 22);
+            this.scanNumber.TabIndex = 1;
+            this.scanNumber.TextChanged += new System.EventHandler(this.scanNumber_TextChanged);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label12.Location = new System.Drawing.Point(10, 10);
+            this.label12.Location = new System.Drawing.Point(9, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(88, 20);
-            this.label12.TabIndex = 5;
-            this.label12.Text = "Dump Box";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // dumpText
-            // 
-            this.dumpText.Location = new System.Drawing.Point(13, 33);
-            this.dumpText.Name = "dumpText";
-            this.dumpText.Size = new System.Drawing.Size(177, 22);
-            this.dumpText.TabIndex = 4;
-            // 
-            // scanProgress
-            // 
-            this.scanProgress.Location = new System.Drawing.Point(372, 12);
-            this.scanProgress.Name = "scanProgress";
-            this.scanProgress.Size = new System.Drawing.Size(178, 23);
-            this.scanProgress.Step = 20;
-            this.scanProgress.TabIndex = 28;
+            this.label12.Size = new System.Drawing.Size(113, 20);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Scan Settings";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 341);
+            this.Controls.Add(this.scanPanel);
             this.Controls.Add(this.scanProgress);
-            this.Controls.Add(this.excelPanel);
             this.Controls.Add(this.esp12Text);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.esp09Text);
@@ -418,8 +444,8 @@
             this.Click += new System.EventHandler(this.tryConnection);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.excelPanel.ResumeLayout(false);
-            this.excelPanel.PerformLayout();
+            this.scanPanel.ResumeLayout(false);
+            this.scanPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -457,11 +483,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox esp03Text;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel excelPanel;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox dumpText;
         private System.Windows.Forms.ProgressBar scanProgress;
         public System.Windows.Forms.TextBox esp01Text;
+        private System.Windows.Forms.Panel scanPanel;
+        private System.Windows.Forms.Button espStatus;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox scanNumber;
+        private System.Windows.Forms.Label label12;
     }
 }
 
