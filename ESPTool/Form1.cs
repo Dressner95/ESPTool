@@ -224,7 +224,7 @@ namespace ESPTool
 
         private void copyButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(esp01Text.Text + "\t" + esp02Text.Text + "\t" + esp03Text.Text + "\t" + esp04Text.Text + "\t" + esp05Text.Text + "\t" + esp06Text.Text + "\t" + esp06Text.Text + "\t" + esp07Text.Text + "\t" + esp08Text.Text + "\t" + esp09Text.Text + "\t" + esp10Text.Text + "\t" + esp11Text.Text + "\t" + esp12Text.Text);
+            Clipboard.SetText(esp01Text.Text + "\t" + esp02Text.Text + "\t" + esp03Text.Text + "\t" + esp04Text.Text + "\t" + esp05Text.Text + "\t" + esp06Text.Text + "\t" + esp07Text.Text + "\t" + esp08Text.Text + "\t" + esp09Text.Text + "\t" + esp10Text.Text + "\t" + esp11Text.Text + "\t" + esp12Text.Text);
         }
 
         private void scanNumber_TextChanged(object sender, EventArgs e)

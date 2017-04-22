@@ -352,6 +352,7 @@
             this.scanProgress.Name = "scanProgress";
             this.scanProgress.Size = new System.Drawing.Size(302, 23);
             this.scanProgress.Step = 1;
+            this.scanProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.scanProgress.TabIndex = 28;
             // 
             // scanPanel
