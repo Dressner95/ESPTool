@@ -22,7 +22,10 @@ namespace ESPTool
         public int[] averages = new int [12];
         bool doneScanning = false;
         Dictionary<string, int> ESPValues = new Dictionary<string, int>();
-        Dictionary<string, int> sortedValues = new Dictionary<string, int>();
+       // Dictionary<string, int> sortedValues = new Dictionary<string, int>();
+
+        List<Tuple<string,string,int>> espList = new List<Tuple<string,string,int>>();
+        
 
 
         public Form1()
@@ -112,8 +115,35 @@ namespace ESPTool
                             string ESPname = "ESP" + numberToUse;
                             ESPValues.Add(ESPname,averages[i]);
                         }
+                        //Classify into tuple list
+                        foreach (KeyValuePair<string, int> entry in ESPValues)
+                        {
+                            // do something with entry.Value or entry.Key
+                            string classToAssign = null;
+                            if (entry.Value < 40)
+                            {
+                                classToAssign = "class40";
+                            } else if (40 <= entry.Value && entry.Value < 50){
+                                classToAssign = "class4050";
+                            }else if (50 <= entry.Value && entry.Value < 60){
+                                classToAssign = "class5060";
+                            }else if (60 <= entry.Value && entry.Value < 70){
+                                classToAssign = "class6070";
+                            }else if (70 <= entry.Value && entry.Value < 80){
+                                classToAssign = "class7080";
+                            }else if (80 <= entry.Value && entry.Value < 90){
+                                classToAssign = "class8090";
+                            } else if (90 < entry.Value){
+                                classToAssign = "class90";
+                            }
+
+                            espList.Add(Tuple.Create(entry.Key,classToAssign,entry.Value));
+                        }
+                        foreach (Tuple<string,string,int> tuple in espList){
+                            Debug.Print(tuple.Item1 + "," + tuple.Item2 + "," + tuple.Item3.ToString());
+                        }
                         //Sort Dict and store (Is this even needed?)
-                        sortedValues = ESPValues.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                        //sortedValues = ESPValues.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
 
                     }
                     espStatus.BackColor = Color.LawnGreen;
@@ -237,7 +267,7 @@ namespace ESPTool
             copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = false; }));
             scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = false; }));
             ESPValues.Clear();
-            sortedValues.Clear();
+           // sortedValues.Clear();
 
         }
 
