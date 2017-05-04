@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Diagnostics;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Linq;
+
 
 namespace ESPTool
 {
@@ -22,16 +20,23 @@ namespace ESPTool
         public int[] averages = new int [12];
         bool doneScanning = false;
         Dictionary<string, int> ESPValues = new Dictionary<string, int>();
-       // Dictionary<string, int> sortedValues = new Dictionary<string, int>();
 
         List<Tuple<string,string,int>> espList = new List<Tuple<string,string,int>>();
-        
+        List<Tuple<string, string, int>> sortedList = new List<Tuple<string, string, int>>();
+        Excel.Application xlApp;
+        Excel.Workbook xlBook;
+        Excel._Worksheet xlSheet;
+        int rowCount;
+
 
 
         public Form1()
         {
             InitializeComponent();
-
+            xlApp = new Excel.Application();
+            xlBook = xlApp.Workbooks.Open(@"C:\Users\David\Documents\Sensor Collect - 422.xlsx");
+            xlSheet = xlBook.Worksheets["All"];
+            rowCount = xlSheet.UsedRange.Rows.Count;
         }
 
         private void tryConnection(object sender, EventArgs e)
@@ -143,11 +148,15 @@ namespace ESPTool
 
                             espList.Add(Tuple.Create(entry.Key,classToAssign,entry.Value));
                         }
+                        /*
                         foreach (Tuple<string,string,int> tuple in espList){
                             Debug.Print(tuple.Item1 + "," + tuple.Item2 + "," + tuple.Item3.ToString());
                         }
-                        //Sort Dict and store (Is this even needed?)
-                        //sortedValues = ESPValues.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+                        */
+
+                        //sort tuple List
+                        sortedList = espList.OrderBy(x => x.Item3).ToList();
+                        //topESP.Invoke(new MethodInvoker(delegate { topESP.Text = sortedList[0].Item1 + "," + sortedList[0].Item2 + "," + sortedList[0].Item3; }));
 
                     }
                     espStatus.BackColor = Color.LawnGreen;
@@ -292,10 +301,5 @@ namespace ESPTool
 
         }
 
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

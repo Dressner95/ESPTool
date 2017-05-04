@@ -92,7 +92,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.topESP = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
@@ -477,7 +477,6 @@
             this.class40.Size = new System.Drawing.Size(60, 22);
             this.class40.TabIndex = 54;
             this.class40.Text = ".95";
-            this.class40.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label26
             // 
@@ -698,12 +697,12 @@
             this.textBox4.Size = new System.Drawing.Size(225, 22);
             this.textBox4.TabIndex = 78;
             // 
-            // textBox5
+            // topESP
             // 
-            this.textBox5.Location = new System.Drawing.Point(19, 35);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(225, 22);
-            this.textBox5.TabIndex = 80;
+            this.topESP.Location = new System.Drawing.Point(19, 35);
+            this.topESP.Name = "topESP";
+            this.topESP.Size = new System.Drawing.Size(225, 22);
+            this.topESP.TabIndex = 80;
             // 
             // textBox6
             // 
@@ -715,7 +714,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label20);
-            this.panel2.Controls.Add(this.textBox5);
+            this.panel2.Controls.Add(this.topESP);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.textBox6);
@@ -862,7 +861,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox topESP;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label20;
