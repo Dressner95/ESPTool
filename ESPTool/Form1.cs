@@ -136,6 +136,10 @@ namespace ESPTool
                             } else if (90 < entry.Value){
                                 classToAssign = "class90";
                             }
+                            else
+                            {
+                                classToAssign = "class100";
+                            }
 
                             espList.Add(Tuple.Create(entry.Key,classToAssign,entry.Value));
                         }
