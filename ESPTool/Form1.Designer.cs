@@ -65,17 +65,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.scanNumber = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.RSSI_ESP1 = new System.Windows.Forms.TextBox();
-            this.RSSI_ESP2 = new System.Windows.Forms.TextBox();
-            this.RSSI_ESP3 = new System.Windows.Forms.TextBox();
-            this.RSSI_ESP4 = new System.Windows.Forms.TextBox();
-            this.RSSI_ESP5 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.ESPPanel = new System.Windows.Forms.Panel();
             this.class40 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -168,7 +157,7 @@
             // 
             this.scanButton.Enabled = false;
             this.scanButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.scanButton.Location = new System.Drawing.Point(29, 224);
+            this.scanButton.Location = new System.Drawing.Point(29, 272);
             this.scanButton.Name = "scanButton";
             this.scanButton.Size = new System.Drawing.Size(236, 105);
             this.scanButton.TabIndex = 1;
@@ -179,7 +168,7 @@
             // copyButton
             // 
             this.copyButton.Enabled = false;
-            this.copyButton.Location = new System.Drawing.Point(372, 297);
+            this.copyButton.Location = new System.Drawing.Point(58, 412);
             this.copyButton.Name = "copyButton";
             this.copyButton.Size = new System.Drawing.Size(178, 47);
             this.copyButton.TabIndex = 2;
@@ -393,10 +382,10 @@
             // 
             // scanProgress
             // 
-            this.scanProgress.Location = new System.Drawing.Point(310, 12);
+            this.scanProgress.Location = new System.Drawing.Point(29, 383);
             this.scanProgress.Maximum = 10;
             this.scanProgress.Name = "scanProgress";
-            this.scanProgress.Size = new System.Drawing.Size(302, 23);
+            this.scanProgress.Size = new System.Drawing.Size(236, 23);
             this.scanProgress.Step = 1;
             this.scanProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.scanProgress.TabIndex = 28;
@@ -407,15 +396,15 @@
             this.scanPanel.Controls.Add(this.label13);
             this.scanPanel.Controls.Add(this.scanNumber);
             this.scanPanel.Controls.Add(this.label12);
-            this.scanPanel.Location = new System.Drawing.Point(13, 125);
+            this.scanPanel.Location = new System.Drawing.Point(12, 147);
             this.scanPanel.Name = "scanPanel";
-            this.scanPanel.Size = new System.Drawing.Size(276, 93);
+            this.scanPanel.Size = new System.Drawing.Size(276, 108);
             this.scanPanel.TabIndex = 29;
             // 
             // espStatus
             // 
             this.espStatus.BackColor = System.Drawing.Color.Red;
-            this.espStatus.Location = new System.Drawing.Point(145, 4);
+            this.espStatus.Location = new System.Drawing.Point(145, 12);
             this.espStatus.Name = "espStatus";
             this.espStatus.Size = new System.Drawing.Size(128, 74);
             this.espStatus.TabIndex = 3;
@@ -425,7 +414,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(13, 36);
+            this.label13.Location = new System.Drawing.Point(14, 44);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(94, 17);
             this.label13.TabIndex = 2;
@@ -433,7 +422,7 @@
             // 
             // scanNumber
             // 
-            this.scanNumber.Location = new System.Drawing.Point(13, 56);
+            this.scanNumber.Location = new System.Drawing.Point(14, 64);
             this.scanNumber.Name = "scanNumber";
             this.scanNumber.Size = new System.Drawing.Size(100, 22);
             this.scanNumber.TabIndex = 1;
@@ -444,101 +433,11 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label12.Location = new System.Drawing.Point(9, 0);
+            this.label12.Location = new System.Drawing.Point(10, 12);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(113, 20);
             this.label12.TabIndex = 0;
             this.label12.Text = "Scan Settings";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(22, 386);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(16, 17);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "1";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(107, 386);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(16, 17);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "2";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(187, 386);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(16, 17);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "3";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(269, 386);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(16, 17);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "4";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(356, 386);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(16, 17);
-            this.label18.TabIndex = 34;
-            this.label18.Text = "5";
-            // 
-            // RSSI_ESP1
-            // 
-            this.RSSI_ESP1.Location = new System.Drawing.Point(25, 410);
-            this.RSSI_ESP1.Name = "RSSI_ESP1";
-            this.RSSI_ESP1.Size = new System.Drawing.Size(60, 22);
-            this.RSSI_ESP1.TabIndex = 35;
-            // 
-            // RSSI_ESP2
-            // 
-            this.RSSI_ESP2.Location = new System.Drawing.Point(110, 410);
-            this.RSSI_ESP2.Name = "RSSI_ESP2";
-            this.RSSI_ESP2.Size = new System.Drawing.Size(60, 22);
-            this.RSSI_ESP2.TabIndex = 36;
-            // 
-            // RSSI_ESP3
-            // 
-            this.RSSI_ESP3.Location = new System.Drawing.Point(190, 410);
-            this.RSSI_ESP3.Name = "RSSI_ESP3";
-            this.RSSI_ESP3.Size = new System.Drawing.Size(60, 22);
-            this.RSSI_ESP3.TabIndex = 37;
-            // 
-            // RSSI_ESP4
-            // 
-            this.RSSI_ESP4.Location = new System.Drawing.Point(272, 410);
-            this.RSSI_ESP4.Name = "RSSI_ESP4";
-            this.RSSI_ESP4.Size = new System.Drawing.Size(60, 22);
-            this.RSSI_ESP4.TabIndex = 38;
-            // 
-            // RSSI_ESP5
-            // 
-            this.RSSI_ESP5.Location = new System.Drawing.Point(359, 410);
-            this.RSSI_ESP5.Name = "RSSI_ESP5";
-            this.RSSI_ESP5.Size = new System.Drawing.Size(60, 22);
-            this.RSSI_ESP5.TabIndex = 39;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label19.Location = new System.Drawing.Point(25, 357);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(158, 20);
-            this.label19.TabIndex = 40;
-            this.label19.Text = "Top 5 ESP via RSSI";
             // 
             // ESPPanel
             // 
@@ -566,7 +465,7 @@
             this.ESPPanel.Controls.Add(this.esp06Text);
             this.ESPPanel.Controls.Add(this.esp03Text);
             this.ESPPanel.Controls.Add(this.label10);
-            this.ESPPanel.Location = new System.Drawing.Point(292, 41);
+            this.ESPPanel.Location = new System.Drawing.Point(295, 12);
             this.ESPPanel.Name = "ESPPanel";
             this.ESPPanel.Size = new System.Drawing.Size(326, 250);
             this.ESPPanel.TabIndex = 41;
@@ -822,7 +721,7 @@
             this.panel2.Controls.Add(this.textBox6);
             this.panel2.Controls.Add(this.textBox3);
             this.panel2.Controls.Add(this.textBox4);
-            this.panel2.Location = new System.Drawing.Point(809, 13);
+            this.panel2.Location = new System.Drawing.Point(319, 268);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(262, 208);
             this.panel2.TabIndex = 81;
@@ -870,20 +769,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 480);
+            this.ClientSize = new System.Drawing.Size(811, 480);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.RSSI_ESP5);
-            this.Controls.Add(this.RSSI_ESP4);
-            this.Controls.Add(this.RSSI_ESP3);
-            this.Controls.Add(this.RSSI_ESP2);
-            this.Controls.Add(this.RSSI_ESP1);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.scanPanel);
             this.Controls.Add(this.scanProgress);
             this.Controls.Add(this.copyButton);
@@ -905,7 +793,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -948,17 +835,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox scanNumber;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox RSSI_ESP1;
-        private System.Windows.Forms.TextBox RSSI_ESP2;
-        private System.Windows.Forms.TextBox RSSI_ESP3;
-        private System.Windows.Forms.TextBox RSSI_ESP4;
-        private System.Windows.Forms.TextBox RSSI_ESP5;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel ESPPanel;
         private System.Windows.Forms.TextBox class40;
         private System.Windows.Forms.Label label26;

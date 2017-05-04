@@ -21,6 +21,10 @@ namespace ESPTool
         public int[] vals2Average = new int[12];
         public int[] averages = new int [12];
         bool doneScanning = false;
+        Dictionary<string, int> ESPValues = new Dictionary<string, int>();
+        Dictionary<string, int> sortedValues = new Dictionary<string, int>();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -76,14 +80,10 @@ namespace ESPTool
                         // take average
                         for (int i = 0; i < 12; i++ )
                         {
-
                                 averages[i] = vals2Average[i] / Int32.Parse(scanNumber.Text);
                                 Debug.Print(i + vals2Average[i].ToString());
                                 Debug.Print(i + averages[i].ToString());
                                 vals2Average[i] = 500;
-                            
-                            
-                            
                         }
                         // print all to tables
                         esp01Text.Invoke(new MethodInvoker(delegate { esp01Text.Text = "-" + averages[0].ToString(); }));
@@ -98,6 +98,23 @@ namespace ESPTool
                         esp10Text.Invoke(new MethodInvoker(delegate { esp10Text.Text = "-" + averages[9].ToString(); }));
                         esp11Text.Invoke(new MethodInvoker(delegate { esp11Text.Text = "-" + averages[10].ToString(); }));
                         esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = "-" + averages[11].ToString(); }));
+                        for (int i = 0; i < 10; i++) //Assign espname and average to dictionary
+                        {
+                            string numberToUse;
+                            if (i == 9)
+                            {
+                                numberToUse = "10";
+                            }
+                            else
+                            {
+                                numberToUse = "0" + (i + 1).ToString();
+                            }
+                            string ESPname = "ESP" + numberToUse;
+                            ESPValues.Add(ESPname,averages[i]);
+                        }
+                        //Sort Dict and store (Is this even needed?)
+                        sortedValues = ESPValues.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+
                     }
                     espStatus.BackColor = Color.LawnGreen;
                     break;
@@ -219,6 +236,8 @@ namespace ESPTool
             esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = ""; }));
             copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = false; }));
             scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = false; }));
+            ESPValues.Clear();
+            sortedValues.Clear();
 
         }
 
