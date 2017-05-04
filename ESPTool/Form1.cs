@@ -267,6 +267,7 @@ namespace ESPTool
             copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = false; }));
             scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = false; }));
             ESPValues.Clear();
+            espList.Clear();
            // sortedValues.Clear();
 
         }
