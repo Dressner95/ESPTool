@@ -26,7 +26,12 @@ namespace ESPTool
         Excel.Application xlApp;
         Excel.Workbook xlBook;
         Excel._Worksheet xlSheet;
+        Excel.Range UsedRange;
         int rowCount;
+        int columnNumber;
+        int searchBound = 10;
+
+        List<Tuple<string, int, int>> possibleLocations = new List<Tuple<string, int, int>>();
 
 
 
@@ -34,9 +39,11 @@ namespace ESPTool
         {
             InitializeComponent();
             xlApp = new Excel.Application();
-            xlBook = xlApp.Workbooks.Open(@"C:\Users\David\Documents\Sensor Collect - 422.xlsx");
+            //xlBook = xlApp.Workbooks.Open(@"C:\Users\David\Documents\Sensor Collect - 422.xlsx");
+            xlBook = xlApp.Workbooks.Open(@"C:\Users\Mark IV\Documents\GitHub\ESPTool\ESPTool\Sensor Collect - 422.xlsx");
             xlSheet = xlBook.Worksheets["All"];
-            rowCount = xlSheet.UsedRange.Rows.Count;
+            UsedRange = xlSheet.UsedRange;
+            rowCount = UsedRange.Row + UsedRange.Rows.Count - 1;
         }
 
         private void tryConnection(object sender, EventArgs e)
@@ -157,6 +164,21 @@ namespace ESPTool
                         //sort tuple List
                         sortedList = espList.OrderBy(x => x.Item3).ToList();
                         //topESP.Invoke(new MethodInvoker(delegate { topESP.Text = sortedList[0].Item1 + "," + sortedList[0].Item2 + "," + sortedList[0].Item3; }));
+                        columnNumber = NameToColNumber(sortedList[0].Item1);
+                        foreach(Excel.Range row in xlSheet.UsedRange.Rows)
+                        {
+                            
+                            if (Int32.Parse(xlSheet.UsedRange.Cells[row.Row, columnNumber].Value.ToString() as string) < sortedList[0].Item3 + searchBound && Int32.Parse(xlSheet.UsedRange.Cells[row.Row, columnNumber].Value.ToString() as string) > sortedList[0].Item3 - searchBound)
+                            {
+                                //add to list
+                                possibleLocations.Add(Tuple.Create(xlSheet.Cells[row.Row, 1].Value.ToString() as string,0, row.Row));
+                            }
+                            
+                        }
+                        foreach (Tuple<string, int, int> tuple in possibleLocations)
+                        {
+                            Debug.Print(tuple.Item1 + "," + tuple.Item2.ToString() + "," + tuple.Item3.ToString());
+                        }
 
                     }
                     espStatus.BackColor = Color.LawnGreen;
@@ -301,5 +323,42 @@ namespace ESPTool
 
         }
 
+        private int NameToColNumber(string esp)
+        {
+            switch (esp)
+            {
+                case "ESP01":
+                    return 2;
+                case "ESP02":
+                    return 3;
+                case "ESP03":
+                    return 4;
+                case "ESP04":
+                    return 5;
+                case "ESP05":
+                    return 6;
+                case "ESP06":
+                    return 7;
+                case "ESP07":
+                    return 8;
+                case "ESP08":
+                    return 9;
+                case "ESP09":
+                    return 10;
+                case "ESP10":
+                    return 11;
+            }
+            return 0;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            xlBook.Close();
+            xlApp.Quit();
+
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(xlSheet);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(xlBook);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+        }
     }
 }

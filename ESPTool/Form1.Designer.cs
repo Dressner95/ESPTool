@@ -141,7 +141,7 @@
             this.comPort.Name = "comPort";
             this.comPort.Size = new System.Drawing.Size(100, 22);
             this.comPort.TabIndex = 1;
-            this.comPort.Text = "COM10";
+            this.comPort.Text = "COM3";
             // 
             // panelTitle
             // 
@@ -779,6 +779,7 @@
             this.Controls.Add(this.ESPPanel);
             this.Name = "Form1";
             this.Text = "ESP Data Collector";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.tryConnection);
             this.panel1.ResumeLayout(false);
