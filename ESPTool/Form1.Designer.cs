@@ -88,12 +88,12 @@
             this.color5060 = new System.Windows.Forms.Button();
             this.color4050 = new System.Windows.Forms.Button();
             this.color40 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.topESP = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.score1 = new System.Windows.Forms.TextBox();
+            this.score2 = new System.Windows.Forms.TextBox();
+            this.score4 = new System.Windows.Forms.TextBox();
+            this.score5 = new System.Windows.Forms.TextBox();
+            this.score0 = new System.Windows.Forms.TextBox();
+            this.score3 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -141,7 +141,7 @@
             this.comPort.Name = "comPort";
             this.comPort.Size = new System.Drawing.Size(100, 22);
             this.comPort.TabIndex = 1;
-            this.comPort.Text = "COM3";
+            this.comPort.Text = "COM10";
             // 
             // panelTitle
             // 
@@ -669,57 +669,57 @@
             this.color40.TabIndex = 74;
             this.color40.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // score1
             // 
-            this.textBox1.Location = new System.Drawing.Point(19, 61);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(225, 22);
-            this.textBox1.TabIndex = 75;
+            this.score1.Location = new System.Drawing.Point(19, 61);
+            this.score1.Name = "score1";
+            this.score1.Size = new System.Drawing.Size(225, 22);
+            this.score1.TabIndex = 75;
             // 
-            // textBox2
+            // score2
             // 
-            this.textBox2.Location = new System.Drawing.Point(19, 89);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(225, 22);
-            this.textBox2.TabIndex = 76;
+            this.score2.Location = new System.Drawing.Point(19, 89);
+            this.score2.Name = "score2";
+            this.score2.Size = new System.Drawing.Size(225, 22);
+            this.score2.TabIndex = 76;
             // 
-            // textBox3
+            // score4
             // 
-            this.textBox3.Location = new System.Drawing.Point(19, 143);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(225, 22);
-            this.textBox3.TabIndex = 77;
+            this.score4.Location = new System.Drawing.Point(19, 143);
+            this.score4.Name = "score4";
+            this.score4.Size = new System.Drawing.Size(225, 22);
+            this.score4.TabIndex = 77;
             // 
-            // textBox4
+            // score5
             // 
-            this.textBox4.Location = new System.Drawing.Point(19, 171);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(225, 22);
-            this.textBox4.TabIndex = 78;
+            this.score5.Location = new System.Drawing.Point(19, 171);
+            this.score5.Name = "score5";
+            this.score5.Size = new System.Drawing.Size(225, 22);
+            this.score5.TabIndex = 78;
             // 
-            // topESP
+            // score0
             // 
-            this.topESP.Location = new System.Drawing.Point(19, 35);
-            this.topESP.Name = "topESP";
-            this.topESP.Size = new System.Drawing.Size(225, 22);
-            this.topESP.TabIndex = 80;
+            this.score0.Location = new System.Drawing.Point(19, 35);
+            this.score0.Name = "score0";
+            this.score0.Size = new System.Drawing.Size(225, 22);
+            this.score0.TabIndex = 80;
             // 
-            // textBox6
+            // score3
             // 
-            this.textBox6.Location = new System.Drawing.Point(19, 117);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(225, 22);
-            this.textBox6.TabIndex = 79;
+            this.score3.Location = new System.Drawing.Point(19, 117);
+            this.score3.Name = "score3";
+            this.score3.Size = new System.Drawing.Size(225, 22);
+            this.score3.TabIndex = 79;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label20);
-            this.panel2.Controls.Add(this.topESP);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox6);
-            this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Controls.Add(this.textBox4);
+            this.panel2.Controls.Add(this.score0);
+            this.panel2.Controls.Add(this.score1);
+            this.panel2.Controls.Add(this.score2);
+            this.panel2.Controls.Add(this.score3);
+            this.panel2.Controls.Add(this.score4);
+            this.panel2.Controls.Add(this.score5);
             this.panel2.Location = new System.Drawing.Point(319, 268);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(262, 208);
@@ -858,12 +858,12 @@
         private System.Windows.Forms.Button color5060;
         private System.Windows.Forms.Button color4050;
         private System.Windows.Forms.Button color40;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox topESP;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox score1;
+        private System.Windows.Forms.TextBox score2;
+        private System.Windows.Forms.TextBox score4;
+        private System.Windows.Forms.TextBox score5;
+        private System.Windows.Forms.TextBox score0;
+        private System.Windows.Forms.TextBox score3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel3;

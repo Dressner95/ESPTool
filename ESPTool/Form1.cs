@@ -29,18 +29,21 @@ namespace ESPTool
         Excel.Range UsedRange;
         int rowCount;
         int columnNumber;
-        int searchBound = 10;
+        int searchBound = 10; //sensativity to initial pulling from excel sheet
 
-        List<Tuple<string, int, int>> possibleLocations = new List<Tuple<string, int, int>>();
-
+        List<Tuple<string, float, int>> possibleLocations = new List<Tuple<string, float, int>>();
+        Dictionary<string, float> scoredLocations  = new Dictionary<string, float>();
+        //Scored list
+        List<Tuple<string, float>> scoredList = new List<Tuple<string, float>>();
+        List<Tuple<string, float>> finalList = new List<Tuple<string, float>>();
 
 
         public Form1()
         {
             InitializeComponent();
             xlApp = new Excel.Application();
-            //xlBook = xlApp.Workbooks.Open(@"C:\Users\David\Documents\Sensor Collect - 422.xlsx");
-            xlBook = xlApp.Workbooks.Open(@"C:\Users\Mark IV\Documents\GitHub\ESPTool\ESPTool\Sensor Collect - 422.xlsx");
+            xlBook = xlApp.Workbooks.Open(@"C:\Users\David\Documents\Sensor Collect - 422.xlsx");
+            //xlBook = xlApp.Workbooks.Open(@"C:\Users\Mark IV\Documents\GitHub\ESPTool\ESPTool\Sensor Collect - 422.xlsx");
             xlSheet = xlBook.Worksheets["All"];
             UsedRange = xlSheet.UsedRange;
             rowCount = UsedRange.Row + UsedRange.Rows.Count - 1;
@@ -171,15 +174,43 @@ namespace ESPTool
                             if (Int32.Parse(xlSheet.UsedRange.Cells[row.Row, columnNumber].Value.ToString() as string) < sortedList[0].Item3 + searchBound && Int32.Parse(xlSheet.UsedRange.Cells[row.Row, columnNumber].Value.ToString() as string) > sortedList[0].Item3 - searchBound)
                             {
                                 //add to list
-                                possibleLocations.Add(Tuple.Create(xlSheet.Cells[row.Row, 1].Value.ToString() as string,0, row.Row));
+                                possibleLocations.Add(Tuple.Create(xlSheet.Cells[row.Row, 1].Value.ToString() as string,0.0f, row.Row));
                             }
                             
                         }
+                        /*
                         foreach (Tuple<string, int, int> tuple in possibleLocations)
                         {
                             Debug.Print(tuple.Item1 + "," + tuple.Item2.ToString() + "," + tuple.Item3.ToString());
                         }
+                        */
 
+                    foreach (Tuple<string,float,int> location in possibleLocations)
+                        {
+                            if (!scoredLocations.ContainsKey(location.Item1)){
+                                scoredLocations.Add(location.Item1, 0.0f);
+                            }
+                            foreach (Tuple<string, string, int> esp in sortedList)
+                            {
+                                var weight = classToWeight(esp.Item2);
+                                var diff = Math.Abs(esp.Item3 - Int32.Parse(xlSheet.UsedRange.Cells[location.Item3,NameToColNumber(esp.Item1)].Value.ToString() as string));
+                                var rawScore = 100 - diff;
+                                var score = rawScore * weight;
+                                scoredLocations[location.Item1] += score;                                
+                            }
+                        }
+                        //At this point the scored dict needs to be ordered and pushed
+                        foreach (KeyValuePair<string, float> entry in scoredLocations)
+                        {
+                            scoredList.Add(Tuple.Create(entry.Key,entry.Value));
+                        }
+                        finalList = scoredList.OrderByDescending(x => x.Item2).ToList();
+                        score0.Invoke(new MethodInvoker(delegate { score0.Text = finalList[0].Item1 + " Score= " + finalList[0].Item2.ToString(); }));
+                        score1.Invoke(new MethodInvoker(delegate { score1.Text = finalList[1].Item1 + " Score= " + finalList[1].Item2.ToString(); }));
+                        score2.Invoke(new MethodInvoker(delegate { score2.Text = finalList[2].Item1 + " Score= " + finalList[2].Item2.ToString(); }));
+                        score3.Invoke(new MethodInvoker(delegate { score3.Text = finalList[3].Item1 + " Score= " + finalList[3].Item2.ToString(); }));
+                        score4.Invoke(new MethodInvoker(delegate { score4.Text = finalList[4].Item1 + " Score= " + finalList[4].Item2.ToString(); }));
+                        score5.Invoke(new MethodInvoker(delegate { score5.Text = finalList[5].Item1 + " Score= " + finalList[5].Item2.ToString(); }));
                     }
                     espStatus.BackColor = Color.LawnGreen;
                     break;
@@ -301,8 +332,22 @@ namespace ESPTool
             esp12Text.Invoke(new MethodInvoker(delegate { esp12Text.Text = ""; }));
             copyButton.Invoke(new MethodInvoker(delegate { copyButton.Enabled = false; }));
             scanButton.Invoke(new MethodInvoker(delegate { scanButton.Enabled = false; }));
+            score0.Invoke(new MethodInvoker(delegate { score0.Text = ""; }));
+            score1.Invoke(new MethodInvoker(delegate { score1.Text = ""; }));
+            score2.Invoke(new MethodInvoker(delegate { score2.Text = ""; }));
+            score3.Invoke(new MethodInvoker(delegate { score3.Text = ""; }));
+            score4.Invoke(new MethodInvoker(delegate { score4.Text = ""; }));
+            score5.Invoke(new MethodInvoker(delegate { score5.Text = ""; }));
+
+
             ESPValues.Clear();
             espList.Clear();
+            sortedList.Clear();
+
+            possibleLocations.Clear();
+            scoredList.Clear();
+            scoredLocations.Clear();
+
            // sortedValues.Clear();
 
         }
@@ -359,6 +404,29 @@ namespace ESPTool
             System.Runtime.InteropServices.Marshal.ReleaseComObject(xlSheet);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(xlBook);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+        }
+        private float classToWeight(string rssiClass)
+        {
+            switch (rssiClass)
+            {
+                case "class40":
+                    return float.Parse(class40.Text);
+                case "class4050":
+                    return float.Parse(class4050.Text);
+                case "class5060":
+                    return float.Parse(class5060.Text);
+                case "class6070":
+                    return float.Parse(class6070.Text);
+                case "class7080":
+                    return float.Parse(class7080.Text);
+                case "class8090":
+                    return float.Parse(class8090.Text);
+                case "class90":
+                    return float.Parse(class90.Text);
+                case "class100":
+                    return 0;
+            }
+            return 0;
         }
     }
 }
